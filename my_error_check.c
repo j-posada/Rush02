@@ -6,7 +6,7 @@
 /*   By: nlozano- <nlozano-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 12:21:54 by nlozano-          #+#    #+#             */
-/*   Updated: 2022/04/17 16:37:10 by nlozano-         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:48:50 by nlozano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_number(char	*argv)
 
 int	ft_checkfile(char	*argv)
 {
-	int	fd;
+	int		fd;
 	char	buf[1];
 	char	*filename;
 
@@ -79,14 +79,8 @@ int	check_num_args(int argc, char **argv)
 				return (1);
 			}
 		}
-		else 
+		else
 			print_error();
 	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	check_num_args(argc, argv);
 	return (0);
 }
