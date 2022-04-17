@@ -6,7 +6,7 @@
 /*   By: nlozano- <nlozano-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 12:21:54 by nlozano-          #+#    #+#             */
-/*   Updated: 2022/04/17 16:48:50 by nlozano-         ###   ########.fr       */
+/*   Updated: 2022/04/17 21:55:00 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	print_error(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 }
 
 int	is_number(char	*argv)
@@ -34,7 +34,7 @@ int	is_number(char	*argv)
 	return (1);
 }
 
-int	ft_checkfile(char	*argv)
+int	checkfile(char	*argv)
 {
 	int		fd;
 	char	buf[1];
@@ -73,14 +73,25 @@ int	check_num_args(int argc, char **argv)
 		}
 		if (argc == 3)
 		{
-			if (is_number(argv[2]) != 1 || ft_checkfile(argv[1]) != 1)
+			if (is_number(argv[2]) != 1)
 			{
 				print_error();
-				return (1);
+				return(0);
 			}
+			if (checkfile(argv[1]) != 1)
+			{
+				print_error();
+				return(0);
+			}
+			return(1);
 		}
-		else
-			print_error();
 	}
 	return (0);
+}
+
+char *dictionaryused(int argc, char **argv)
+{
+	if (argc == 3)
+		return (argv[1]);
+	return("numbers.dict");
 }

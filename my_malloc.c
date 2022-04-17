@@ -6,7 +6,7 @@
 /*   By: nlozano- <nlozano-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 20:34:52 by nlozano-          #+#    #+#             */
-/*   Updated: 2022/04/17 12:44:40 by agalan-g         ###   ########.fr       */
+/*   Updated: 2022/04/17 22:01:03 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void  print_3d_array(char ***A, int *paramMtrx)
 				printf("%c", A[i][j][k]);
 				k++;
 			}
-			//write(1, "A",1);	
+			//write(1, "A",1);
 			//printf("\n");
-			j++;	
+			j++;
 		}
 		//write(1, "B", 1);
 		printf("\n");
@@ -107,12 +107,12 @@ int deallocate_memory2(char **arg, int n)
 	return (0);
 }
 
-void	assign_values2(char ***A, int *paramMtrx, int *ijk)
+void	assign_values2(char ***A, int *paramMtrx, int *ijk,char *filename)
 {
 	int	fd;
 	char	buf[1] = " ";
 
-	fd = open ("numbers.dict",O_RDONLY);
+	fd = open (filename,O_RDONLY);
 	while (ijk[0] <= paramMtrx[1])
 	{
 		ijk[1] = 0;
@@ -135,12 +135,12 @@ void	assign_values2(char ***A, int *paramMtrx, int *ijk)
 	close(fd);
 }
 
-void  assign_values(char ***A, int *paramMtrx)
+void  assign_values(char ***A, int *paramMtrx, char *filename)
 {
 	int ijk[3];
 
 	ijk[0] = 0;
 	ijk[1] = 0;
 	ijk[2] = 0;
-	assign_values2(A, paramMtrx, ijk);	
+	assign_values2(A, paramMtrx, ijk,filename);
 }

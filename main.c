@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agalan-g <agalan-g@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jposada- <jposada-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/17 04:41:18 by agalan-g          #+#    #+#             */
-/*   Updated: 2022/04/17 16:22:47 by agalan-g         ###   ########.fr       */
+/*   Created: 2022/04/17 18:58:07 by jposada-          #+#    #+#             */
+/*   Updated: 2022/04/17 22:07:46 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "functions.h"
 
-int	paramMatrix(int *paramMtrx);
-char	***declare(int *paramMtrx);
-void	print_3d_array(char ***A, int *paramMtrx);
-void	deallocate_memory(char ***A, int *paramMtrx);
-void	searcher(char ***A, int *paramMtrx, int argc, char **argv);
-
-int	main(int argc, char **argv)
+int main (int argc, char *argv[])
 {
 	int paramMtrx[3];
 	int err;
 	char	***A;
-
-	(void)argc;
-	(void)argv;
-
-	err = paramMatrix(paramMtrx);
+	
+	if (check_num_args(argc, argv) !=1)
+	{
+		return(0);
+	}
+	err = paramMatrix(paramMtrx, dictionaryused(argc,argv));
 	if (err == 1)
 		return (0);
-	A = declare(paramMtrx);
+	A = declare(paramMtrx,dictionaryused(argc,argv));
 	print_3d_array(A, paramMtrx);
-	searcher(A, paramMtrx, argc, argv);
+//	searcher(A, paramMtrx, argc, argv);
 	printf("PRUEBA2 PASADA \n");
-	deallocate_memory(A, paramMtrx);
-	return(0);
+	err=deallocate_memory(A, paramMtrx);
+
+	printf("Numero a buscar: %s\n", argv[1]);
+return (0);
 }
+
+

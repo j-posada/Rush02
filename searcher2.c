@@ -6,14 +6,17 @@
 /*   By: agalan-g <agalan-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:49:16 by agalan-g          #+#    #+#             */
-/*   Updated: 2022/04/17 16:10:30 by agalan-g         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:58:45 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
-int search1(char ***A, int *paramMtrx, int *cont, char **argv)
+int search1(char ***A, int *paramMtrx, int pos, char *numtosearch)
 {
-	cont[3] = 0;// esto es x
+	int	i =0;
+	int	x =0;
+
+		cont[3] = 0;// esto es x
 	while (cont[3] <= paramMtrx[1])
 	{
 		cont[5] = 0; // esto es z

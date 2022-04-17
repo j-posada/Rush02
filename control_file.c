@@ -6,15 +6,16 @@
 /*   By: jposada- <jposada-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 22:13:52 by jposada-          #+#    #+#             */
-/*   Updated: 2022/04/17 16:05:04 by agalan-g         ###   ########.fr       */
+/*   Updated: 2022/04/17 21:40:13 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "functions.h"
 
-int ft_fileSize (void)
+int ft_fileSize (char *filename)
 {
 	int	fd;
 	char	buf[1];
@@ -23,17 +24,17 @@ int ft_fileSize (void)
 
 	sizefile = 0;
 	nr_bytes = -1;
-	fd = open ("numbers.dict",O_RDONLY);
+	fd = open (filename,O_RDONLY);
 	while ((int)(nr_bytes) != 0)
 	{
-		nr_bytes = read (fd, buf,1); 
+		nr_bytes = read (fd, buf,1);
 		sizefile++;
 	}
 	close(fd);
 	return(sizefile);
 }
 
-int ft_countlines (void)
+int ft_countlines (char *filename)
 {
 	char	buf[1];
 	int	fd;
@@ -42,10 +43,10 @@ int ft_countlines (void)
 
 	eolcount = 0;
 	nr_bytes = -1;
-	fd = open ("numbers.dict",O_RDONLY);
+	fd = open (filename,O_RDONLY);
 	while ((int)(nr_bytes) != 0)
 	{
-		nr_bytes = read (fd, buf,1); 
+		nr_bytes = read (fd, buf,1);
 		if (buf[0] == '\n' )
 			eolcount++;
 	}
@@ -53,7 +54,7 @@ int ft_countlines (void)
 	return(eolcount);
 }
 
-int ft_maxchar (int currentpos, int posstop)
+int ft_maxchar (int currentpos, int posstop, char *filename)
 {
 	int	fd;
 	char	buf[1];
@@ -63,10 +64,10 @@ int ft_maxchar (int currentpos, int posstop)
 
 	nr_bytes = -1;
 	size_max = 0;
-	fd = open ("numbers.dict",O_RDONLY);
+	fd = open (filename,O_RDONLY);
 	while ((int)(nr_bytes) != 0)
 	{
-		nr_bytes = read (fd, buf,1); 
+		nr_bytes = read (fd, buf,1);
 		if (buf[0] == ':' || buf[0] == '\n')
 		{
 			gap = currentpos - posstop;
@@ -80,15 +81,15 @@ int ft_maxchar (int currentpos, int posstop)
 	return(size_max);
 }
 
-int	ft_checkfile (void)
+int	ft_checkfile (char *filename)
 {
 	int	fd;
 	char	buf[1];
 
-	fd = open ("numbers.dict",O_RDONLY);
+	fd = open (filename,O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error carga fichero");
+		print_error();
 		close(fd);
 		return (1);
 	}
@@ -96,7 +97,7 @@ int	ft_checkfile (void)
 	{
 		if (read(fd,buf,1) == 0)
 		{
-			printf("Error fichero vacio");
+			print_error();
 			close(fd);
 			return (1);
 		}
@@ -105,7 +106,7 @@ int	ft_checkfile (void)
 	}
 }
 
-int paramMatrix (int *paramMtrx)
+int paramMatrix (int *paramMtrx, char *filename)
 {
 	int	currentpos;
 	int err;
@@ -113,12 +114,12 @@ int paramMatrix (int *paramMtrx)
 
 	currentpos = 0;
 	posstop = 0;
-	err = ft_checkfile();
+	err = ft_checkfile(filename);
 	if (err == 0)
 	{
-		paramMtrx[0] = ft_fileSize();
-		paramMtrx[1] = ft_countlines();
-		paramMtrx[2] = ft_maxchar(currentpos, posstop);
+		paramMtrx[0] = ft_fileSize(filename);
+		paramMtrx[1] = ft_countlines(filename);
+		paramMtrx[2] = ft_maxchar(currentpos, posstop, filename);
 	}
 	return (err);
 }

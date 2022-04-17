@@ -6,14 +6,13 @@
 /*   By: agalan-g <agalan-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 04:47:36 by agalan-g          #+#    #+#             */
-/*   Updated: 2022/04/17 11:13:00 by agalan-g         ###   ########.fr       */
+/*   Updated: 2022/04/17 22:07:18 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-
-void	assign_values(char ***A, int *paramMtrx);
+#include "functions.h"
 
 int err_mem1(char*** A)
 {
@@ -45,7 +44,7 @@ int err_mem3(char* A)
 	return (0);
 }
 
-char	***declare(int *paramMtrx)
+char	***declare(int *paramMtrx, char *filename)
 {
 	int i;
 	int j;
@@ -69,6 +68,6 @@ char	***declare(int *paramMtrx)
         }
 		i++;
     }
-	assign_values(A, paramMtrx);
+	assign_values(A, paramMtrx,filename);
 	return(A);
 }
