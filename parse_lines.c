@@ -6,9 +6,10 @@
 /*   By: jposada- <jposada-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 12:30:02 by jposada-          #+#    #+#             */
-/*   Updated: 2022/04/17 14:47:02 by jposada-         ###   ########.fr       */
+/*   Updated: 2022/04/17 22:58:19 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "functions.h"
 
 int		ft_char_is_numeric(char str);
 int		ft_char_is_printable(char str);

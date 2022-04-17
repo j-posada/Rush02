@@ -6,7 +6,7 @@
 /*   By: nlozano- <nlozano-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 20:34:52 by nlozano-          #+#    #+#             */
-/*   Updated: 2022/04/17 22:01:03 by jposada-         ###   ########.fr       */
+/*   Updated: 2022/04/17 22:51:02 by jposada-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void  print_3d_array2(char **A, int argc, char **argv)
+void	print_3d_array2(char **A, int argc, char **argv)
 {
-	int i;
-	int j;
-	int k;
-	int n;
+	int	i;
+	int	j;
+	int	k;
+	int	n;
 
 	k = 0;
 	while (argv[argc - 1][k] != '\0')
@@ -31,58 +31,52 @@ void  print_3d_array2(char **A, int argc, char **argv)
 	i = 0;
 	while (i < n)
 	{
-		j  = 0;
-		while(j < 3)
+		j = 0;
+		while (j < 3)
 		{
-			printf("%c", A[i][j]);
+			write(1, &A[i][j], 1);
 			j++;
 		}
-		//write(1, "B", 1);
-		printf("\n");
+		write(1, "\n", 1);
 		i++;
 	}
-
 }
 
-void  print_3d_array(char ***A, int *paramMtrx)
+void	print_3d_array(char ***A, int *paramMtrx)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	while (i < paramMtrx[1])
 	{
-		j  = 0;
-		while(j < 2)
+		j = 0;
+		while (j < 2)
 		{
 			k = 0;
 			while (k < paramMtrx[2])
 			{
-				printf("%c", A[i][j][k]);
+				write(1, &A[i][j][k], 1);
 				k++;
 			}
-			//write(1, "A",1);
-			//printf("\n");
 			j++;
 		}
-		//write(1, "B", 1);
-		printf("\n");
+		write(1, "\n", 1);
 		i++;
 	}
-
 }
 
-int deallocate_memory(char ***A, int *paramMtrx)
+int	deallocate_memory(char ***A, int *paramMtrx)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while(i < paramMtrx[0])
+	while (i < paramMtrx[0])
 	{
 		j = 0;
-		while(j < paramMtrx[0])
+		while (j < paramMtrx[0])
 		{
 			free(A[i][j]);
 			j++;
@@ -94,53 +88,15 @@ int deallocate_memory(char ***A, int *paramMtrx)
 	return (0);
 }
 
-int deallocate_memory2(char **arg, int n)
+int	deallocate_memory2(char **arg, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < n)
+	while (i < n)
 	{
 		free(arg[i]);
 	}
 	free(arg);
 	return (0);
-}
-
-void	assign_values2(char ***A, int *paramMtrx, int *ijk,char *filename)
-{
-	int	fd;
-	char	buf[1] = " ";
-
-	fd = open (filename,O_RDONLY);
-	while (ijk[0] <= paramMtrx[1])
-	{
-		ijk[1] = 0;
-		while(buf[0] != '\n' || ijk[1] < 2)
-		{
-			ijk[2] = 0;
-			while ((buf[0] != ':' && buf[0] != '\n') || ijk[2] < paramMtrx[2])
-			{
-				read (fd, buf, 1);
-				if ((buf[0] != ':') && (buf[0] != '\n'))
-					A[ijk[0]][ijk[1]][ijk[2]] = buf[0];
-				else
-					break ;
-				ijk[2] = ijk[2] + 1;
-			}
-			ijk[1] = ijk[1] + 1;
-		}
-		ijk[0] = ijk[0] + 1;
-	}
-	close(fd);
-}
-
-void  assign_values(char ***A, int *paramMtrx, char *filename)
-{
-	int ijk[3];
-
-	ijk[0] = 0;
-	ijk[1] = 0;
-	ijk[2] = 0;
-	assign_values2(A, paramMtrx, ijk,filename);
 }
